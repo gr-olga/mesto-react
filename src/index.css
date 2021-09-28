@@ -1,6 +1,5 @@
-@import '../src/fonts';
 
-@import "../vendor/normalize.css";
+@import "../src/vendor/normalize.css";
 @import "../src/fonts/Inter Web/inter.css";
 @import "../src/blocks/body/body.css";
 @import "../src/blocks/page/page.css";

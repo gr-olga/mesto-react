@@ -1,47 +1,18 @@
 
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
 function App() {
     return (
         <div className="App">
+            <div className="body">
             <div className="page">
-                <header className="header">
-                    <img src="" className="header__logo" alt="Логотип"/>
-                </header>
-                <main className="content">
-                    <section className="profile">
-                        <div className="profile__avatar-container">
-                            <img src="#" className="profile__avatar" alt="аватар"/>
-                        </div>
-                        <div className="profile__info">
-                            <h1 className="profile__name"/>
-                            <button className="profile__edit-button" type="button"/>
-                            <p className="profile__extra"/>
-                        </div>
-                        <button className="profile__add-card-button" type="button"/>
-                    </section>
-                    <section className="cards-grid">
-                        <template id="card">
-                            <div className="card">
-                                <button type="button" className="card__remove">
-                                    <img src="" alt="bin"/>
-                                </button>
-                                <img className="card__image" alt="фото"/>
-                                <div className="card__info">
-                                    <h2 className="card__title"/>
-                                    <div className="card__like-box">
-                                        <button className="card__like" type="button"/>
-                                        <p className="card__like-num">1</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </section>
-                </main>
-                <footer className="footer">
-                    <p className="footer__copyright">© 2020 Mesto Russia</p>
-                </footer>
+               <Header/>
+              <Main/>
+              <Footer/>
             </div>
             <section>
-                <div className="popup" id="edit_profile_popup">
+                <div className="popup" id="profile_popup">
                     <div className="popup__container">
                         <button className="popup__btn-close" type="button"/>
                         <h2 className="popup__title">Редактировать профиль</h2>
@@ -117,6 +88,7 @@ function App() {
                     </div>
                 </div>
             </section>
+        </div>
         </div>
     )
 }
