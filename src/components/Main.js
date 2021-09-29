@@ -1,14 +1,30 @@
+import React from "react";
+import {api} from "../utils/Api";
+
 function Main(props){
+
+  const [userName,setUserName] = React.useState()
+  const [userDescription,setUserDescription] = React.useState()
+  const [userAvatar,setUserAvatar] = React.useState()
+
+    React.useEffect(() =>{
+        api.getInitialProfile().then(({name, about, avatar}) => {
+            setUserName(name)
+            setUserDescription(about)
+            setUserAvatar(avatar)
+        })
+    })
+
     return(
         <main className="content">
             <section className="profile">
                 <div className="profile__avatar-container">
-                    <img src="#" className="profile__avatar" alt="аватар" onClick={props.onEditAvatar}/>
+                    <img src={userAvatar} className="profile__avatar" alt="аватар" onClick={props.onEditAvatar}/>
                 </div>
                 <div className="profile__info">
-                    <h1 className="profile__name">Jack-If-Kusto</h1>
+                    <h1 className="profile__name">{userName}</h1>
                     <button className="profile__edit-button" type="button"onClick={props.onEditProfile}/>
-                    <p className="profile__extra"/>
+                    <p className="profile__extra">{userDescription}</p>
                 </div>
                 <button className="profile__add-card-button" type="button" onClick={props.onAddPlace}/>
             </section>
