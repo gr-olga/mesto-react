@@ -23,18 +23,37 @@ function App() {
         setEditProfilePopupOpen(true)
     }
 
+    function closeAllPopups(){
+        setEditProfilePopupOpen(false)
+        setAddPlacePopupOpen(false)
+        setEditAvatarPopupOpen(false)
+    }
+
     return (
         <div className="App">
             <div className="body">
                 <div className="page">
                     <Header/>
-                    <Main onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick}/>
+                    <Main
+                        onAddPlace={handleAddPlaceClick}
+                        onEditAvatar={handleEditAvatarClick}
+                        onEditProfile={handleEditProfileClick}
+                    />
                     <Footer/>
                 </div>
                 <section>
-                    <PopupWithForm name="profile" title="Редактировать профиль" isOpen={isEditProfilePopupOpen}/>
-                    <PopupWithForm name="card" title="Новое место" isOpen={isAddPlacePopupOpen}/>
-                    <PopupWithForm name="avatar" title="Новый аватар" isOpen={isEditAvatarPopupOpen}/>
+                    <PopupWithForm name="profile" title="Редактировать профиль"
+                                   isOpen={isEditProfilePopupOpen}
+                                   onClose={closeAllPopups}
+                    />
+                    <PopupWithForm name="card" title="Новое место"
+                                   isOpen={isAddPlacePopupOpen}
+                                   onClose={closeAllPopups}
+                    />
+                    <PopupWithForm name="avatar" title="Новый аватар"
+                                   isOpen={isEditAvatarPopupOpen}
+                                   onClose={closeAllPopups}
+                    />
                     <ImagePopup/>
                     <div className="popup" id="small_popup">
                         <div className="popup__container-small">
