@@ -7,6 +7,12 @@ import PopupWithForm from "./PopupWithForm";
 
 function App() {
 
+    const [selectedCard, setSelectedCard] = React.useState(false)
+
+    function handleCardClick(){
+        setSelectedCard(true)
+    }
+
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
     const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
@@ -27,6 +33,7 @@ function App() {
         setEditProfilePopupOpen(false)
         setAddPlacePopupOpen(false)
         setEditAvatarPopupOpen(false)
+        setSelectedCard(false)
     }
 
     return (
