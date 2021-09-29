@@ -1,25 +1,9 @@
 function Main(props){
-        // onEditProfile
-        // onAddPlace
-        // onEditAvatar
-
-
-     function handleEditAvatarClick () {
-            if (props.onEditProfile) {
-                document.querySelector('#avatar_popup').classList.add('popup_is-open')
-            }
-            else {
-                document.querySelector('#avatar_popup').classList.remove('popup_is-open')
-            }
-        }
-
-    // const handleEditProfileClick= () =>  document.querySelector('#profile_popup').classList.add('popup_is-open');
-    // const handleAddPlaceClick= () =>  document.querySelector('#card_popup').classList.add('popup_is-open');
     return(
         <main className="content">
             <section className="profile">
                 <div className="profile__avatar-container">
-                    <img src="#" className="profile__avatar" alt="аватар" onClick={handleEditAvatarClick}/>
+                    <img src="#" className="profile__avatar" alt="аватар" onClick={props.onEditAvatar}/>
                 </div>
                 <div className="profile__info">
                     <h1 className="profile__name">Jack-If-Kusto</h1>
