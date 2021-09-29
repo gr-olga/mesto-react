@@ -1,9 +1,20 @@
-function Main(){
+function Main(props){
+        // onEditProfile
+        // onAddPlace
+        // onEditAvatar
 
-    const handleEditAvatarClick = () => document.querySelector('#avatar_form').classList.add('popup_is-open')
-    const handleEditProfileClick= () =>  document.querySelector('#edit_profile_popup').classList.add('popup_is-open');
-    const handleAddPlaceClick= () =>  document.querySelector('#add_card_popup').classList.add('popup_is-open');
 
+     function handleEditAvatarClick () {
+            if (props.onEditProfile) {
+                document.querySelector('#avatar_popup').classList.add('popup_is-open')
+            }
+            else {
+                document.querySelector('#avatar_popup').classList.remove('popup_is-open')
+            }
+        }
+
+    // const handleEditProfileClick= () =>  document.querySelector('#profile_popup').classList.add('popup_is-open');
+    // const handleAddPlaceClick= () =>  document.querySelector('#card_popup').classList.add('popup_is-open');
     return(
         <main className="content">
             <section className="profile">
@@ -12,10 +23,10 @@ function Main(){
                 </div>
                 <div className="profile__info">
                     <h1 className="profile__name">Jack-If-Kusto</h1>
-                    <button className="profile__edit-button" type="button"onClick={handleEditProfileClick}/>
+                    <button className="profile__edit-button" type="button"onClick={props.onEditProfile}/>
                     <p className="profile__extra"/>
                 </div>
-                <button className="profile__add-card-button" type="button" onClick={handleAddPlaceClick}/>
+                <button className="profile__add-card-button" type="button" onClick={props.onAddPlace}/>
             </section>
             <section className="cards-grid">
                 <template id="card">

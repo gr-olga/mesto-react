@@ -9,3 +9,4 @@ function ImagePopup(props){
     </div>
     )
 }
+export default ImagePopup;

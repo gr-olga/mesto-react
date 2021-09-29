@@ -1,11 +1,14 @@
+import React from "react";
 function PopupWithForm(props) {
+
+    const [isOpen, setOpen] = React.useState(true)
 
     return (
         <div className="popup" id={`${props.name}-popup`}>
             <div className="popup__container">
                 <button className="popup__btn-close" type="button"/>
                 <h2 className="popup__title">{props.title}</h2>
-                <form className="popup__form" name={`${props.name}Info`} noValidate>
+                <form className="popup__form" name={`${props.name}Form`} noValidate>
                     <label className="popup__label">
                         <input name="profileName" id={`${props.name}-name`} className="popup__input" type="text"
                                placeholder="Имя"
@@ -25,3 +28,4 @@ function PopupWithForm(props) {
     )
 
 }
+export default PopupWithForm
