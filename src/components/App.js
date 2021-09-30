@@ -6,11 +6,10 @@ import ImagePopup from "./ImagePopup";
 import PopupWithForm from "./PopupWithForm";
 
 function App() {
+    const [selectedCard, setSelectedCard] = React.useState(undefined)
 
-    const [selectedCard, setSelectedCard] = React.useState(false)
-
-    function handleCardClick(){
-        setSelectedCard(true)
+    function handleCardClick(card){
+       setSelectedCard(card)
     }
 
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
@@ -45,6 +44,7 @@ function App() {
                         onAddPlace={handleAddPlaceClick}
                         onEditAvatar={handleEditAvatarClick}
                         onEditProfile={handleEditProfileClick}
+                        onSelectedCard={handleCardClick}
                     />
                     <Footer/>
                 </div>
@@ -61,14 +61,10 @@ function App() {
                                    isOpen={isEditAvatarPopupOpen}
                                    onClose={closeAllPopups}
                     />
-                    <ImagePopup/>
-                    <div className="popup" id="small_popup">
-                        <div className="popup__container-small">
-                            <button className="popup__btn-close" type="button"/>
-                            <h2 className="popup__title-small">Вы уверены?</h2>
-                            <button className="popup__save-small">Да</button>
-                        </div>
-                    </div>
+                    <ImagePopup
+                        card={selectedCard}
+                        onClose={closeAllPopups}
+                    />
                 </section>
             </div>
         </div>

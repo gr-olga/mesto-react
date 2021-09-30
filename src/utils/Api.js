@@ -6,9 +6,6 @@ const handleResponse = (res) => {
     return res.json();
 }
 class Api {
-    constructor(options) {
-        // тело конструктора
-    }
 
     _token = token;
 

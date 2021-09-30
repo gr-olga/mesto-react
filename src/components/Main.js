@@ -24,6 +24,10 @@ function Main(props) {
         })
     })
 
+    function onCardClick(card) {
+        props.onSelectedCard(card)
+    }
+
     return (
         <main className="content">
             <section className="profile">
@@ -39,7 +43,7 @@ function Main(props) {
             </section>
             <section className="cards-grid">
                 {cards.map((card, i) => {
-                    return <Card {...card} key={i}/>;
+                    return <Card {...card} onCardClick={onCardClick} key={i} />
                 })}
             </section>
         </main>
