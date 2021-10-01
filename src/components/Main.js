@@ -9,8 +9,8 @@ function Main(props) {
     React.useEffect(() => {
         api.getInitialCards().then((card) => {
             setCards(card)
-        })
-    })
+        }).catch((err) => console.log(err))
+    },[])
 
     const [userName, setUserName] = React.useState()
     const [userDescription, setUserDescription] = React.useState()
@@ -21,8 +21,8 @@ function Main(props) {
             setUserName(name)
             setUserDescription(about)
             setUserAvatar(avatar)
-        })
-    })
+        }).catch((err) => console.log(err))
+    },[])
 
     function onCardClick(card) {
         props.onSelectedCard(card)
@@ -42,8 +42,8 @@ function Main(props) {
                 <button className="profile__add-card-button" type="button" onClick={props.onAddPlace}/>
             </section>
             <section className="cards-grid">
-                {cards.map((card, i) => {
-                    return <Card {...card} onCardClick={onCardClick} key={i} />
+                {cards.map((card, _id) => {
+                    return <Card {...card} onCardClick={onCardClick} key={_id} />
                 })}
             </section>
         </main>
