@@ -40,7 +40,7 @@
 @import "../src/blocks/popup/__btn/popup__btn-close.css";
 @import "../src/blocks/popup/_is-open/popup_is-open.css";
 @import "../src/blocks/popup/container-small/popup__container-small.css";
-@import "../src/blocks/popup/container-medium/popup__container-medium.css";
+@import "blocks/popup/container-avatar/popup__avatar.css";
 @import "../src/blocks/popup/title-medium/popup__title-medium.css";
 
 @import "../src/blocks/popup/__card-container/popup__card-container.css";
