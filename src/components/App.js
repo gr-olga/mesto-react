@@ -9,10 +9,11 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function App() {
 
-   const [currentUser, setCurrentUser] = React.useState([])
+   const [user, setUser] = React.useState({})
+
     React.useEffect(() => {
         api.getInitialProfile().then((info) => {
-            setCurrentUser(info);
+            setUser(info);
         }).catch((err) => console.log(err))
     },[])
 
@@ -50,7 +51,7 @@ function App() {
             <div className="body">
                 <div className="page">
                     <Header/>
-                    <CurrentUserContext.Provider value={currentUser[currentUser]}>
+                    <CurrentUserContext.Provider value={user}>
                     <Main
                         onAddPlace={handleAddPlaceClick}
                         onEditAvatar={handleEditAvatarClick}
