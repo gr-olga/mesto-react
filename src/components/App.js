@@ -4,8 +4,18 @@ import Main from "./Main";
 import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
 import PopupWithForm from "./PopupWithForm";
+import {api} from "../utils/Api";
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function App() {
+
+   const [currentUser, setCurrentUser] = React.useState([])
+    React.useEffect(() => {
+        api.getInitialProfile().then((info) => {
+            setCurrentUser(info);
+        }).catch((err) => console.log(err))
+    },[])
+
     const [selectedCard, setSelectedCard] = React.useState(undefined)
 
     function handleCardClick(card){
@@ -40,12 +50,14 @@ function App() {
             <div className="body">
                 <div className="page">
                     <Header/>
+                    <CurrentUserContext.Provider value={currentUser[currentUser]}>
                     <Main
                         onAddPlace={handleAddPlaceClick}
                         onEditAvatar={handleEditAvatarClick}
                         onEditProfile={handleEditProfileClick}
                         onSelectedCard={handleCardClick}
                     />
+                    </CurrentUserContext.Provider>
                     <Footer/>
                 </div>
                 <section>

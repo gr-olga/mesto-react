@@ -12,17 +12,19 @@ function Main(props) {
         }).catch((err) => console.log(err))
     },[])
 
-    const [userName, setUserName] = React.useState()
-    const [userDescription, setUserDescription] = React.useState()
-    const [userAvatar, setUserAvatar] = React.useState()
+    // const [userName, setUserName] = React.useState()
+    // const [userDescription, setUserDescription] = React.useState()
+    // const [userAvatar, setUserAvatar] = React.useState()
 
-    React.useEffect(() => {
-        api.getInitialProfile().then(({name, about, avatar}) => {
-            setUserName(name)
-            setUserDescription(about)
-            setUserAvatar(avatar)
-        }).catch((err) => console.log(err))
-    },[])
+    // React.useEffect(() => {
+    //     api.getInitialProfile().then(({name, about, avatar}) => {
+    //         setUserName(name)
+    //         setUserDescription(about)
+    //         setUserAvatar(avatar)
+    //     }).catch((err) => console.log(err))
+    // },[])
+
+
 
     function onCardClick(card) {
         props.onSelectedCard(card)
