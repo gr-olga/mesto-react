@@ -28,9 +28,13 @@ function Main(props) {
     // },[])
 
 
-
     function onCardClick(card) {
         props.onSelectedCard(card)
+    }
+
+    function isOwnerCard(){
+        const isOwn = props.card.owner._id === currentUser._id;
+          return  `card__remove ${isOwn ? 'card__remove' : 'card__remove_active'}`
     }
 
     return (
@@ -49,7 +53,7 @@ function Main(props) {
             </section>
             <section className="cards-grid">
                 {cards.map((card, _id) => {
-                    return <Card {...card} onCardClick={onCardClick} key={_id} />
+                    return <Card {...card} onCardClick={onCardClick} key={_id} style ={isOwnerCard} />
                 })}
             </section>
         </main>

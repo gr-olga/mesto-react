@@ -17,6 +17,7 @@ function App() {
         }).catch((err) => console.log(err))
     },[])
 
+
     const [selectedCard, setSelectedCard] = React.useState(undefined)
 
     function handleCardClick(card){
