@@ -20,12 +20,6 @@ function Main(props) {
         props.onSelectedCard(card)
     }
 
-    // function handleCardLike(card) {
-    //     const isLiked = card.likes.some(i => i._id === currentUser._id)
-    //     api.updateLikes(card._id, !isLiked).then((cards) => {
-    //         console.log(cards.map((item, _id) => item._id === card._id ? cards : item))
-    //         })
-    //     }
     function handleCardLike(card) {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
         if(!isLiked) {
@@ -41,6 +35,13 @@ function Main(props) {
             })
         }
 
+    }
+
+    function handleCardDelete(card){
+            api.deleteCard(card._id).then(()=>{
+            const newCards = cards.filter((item) => card._id !== item._id)
+                setCards(newCards)
+            })
     }
 
 return (
@@ -59,7 +60,11 @@ return (
         </section>
         <section className="cards-grid">
             {cards.map((card, _id) => {
-                return <Card {...card} onCardClick={onCardClick} onCardLike={handleCardLike} key={_id}/>
+                return <Card {...card}
+                             onCardClick={onCardClick}
+                             onCardLike={handleCardLike}
+                             onCardDelete={handleCardDelete}
+                             key={_id}/>
             })}
         </section>
     </main>
