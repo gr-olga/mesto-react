@@ -10,6 +10,9 @@ function Card(props) {
     function handleClick() {
         props.onCardClick(props);
     }
+    function handleLikeClick(){
+        props.onCardLike(props)
+    }
 
     function getOwnerCardClass() {
         const isOwn = props.owner._id === currentUser._id;
@@ -17,18 +20,10 @@ function Card(props) {
     }
 
     function getLikeCardClass() {
-        // const isLiked = props.likes.some(i => i._id === currentUser._id);
-        // console.log(isLiked);
-        return `card__like ${like ? 'card__like-active' : ''}`
+         const isLik = props.likes.some(i => i._id === currentUser._id);
+        return `card__like ${isLik ? 'card__like-active' : ''}`
     }
 
-    function toggleLike() {
-        if (like) {
-            setLike(false)
-        } else {
-            setLike(true)
-        }
-    }
 
     const {link, name} = props
     return (
@@ -40,7 +35,7 @@ function Card(props) {
             <div className="card__info">
                 <h2 className="card__title">{name}</h2>
                 <div className="card__like-box">
-                    <button className={getLikeCardClass()} onClick={toggleLike} type="button"/>
+                    <button className={getLikeCardClass()} onClick={handleLikeClick} type="button"/>
                     <p className="card__like-num">{props.likes.length}</p>
                 </div>
             </div>
