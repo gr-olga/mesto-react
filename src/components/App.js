@@ -10,19 +10,19 @@ import EditProfilePopup from "./EditProfilePopup";
 
 function App() {
 
-   const [user, setUser] = React.useState({})
+    const [user, setUser] = React.useState({})
 
     React.useEffect(() => {
         api.getInitialProfile().then((info) => {
             setUser(info);
         }).catch((err) => console.log(err))
-    },[])
+    }, [])
 
 
     const [selectedCard, setSelectedCard] = React.useState(undefined)
 
-    function handleCardClick(card){
-       setSelectedCard(card)
+    function handleCardClick(card) {
+        setSelectedCard(card)
     }
 
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
@@ -41,11 +41,17 @@ function App() {
         setEditProfilePopupOpen(true)
     }
 
-    function closeAllPopups(){
+    function closeAllPopups() {
         setEditProfilePopupOpen(false)
         setAddPlacePopupOpen(false)
         setEditAvatarPopupOpen(false)
         setSelectedCard(undefined)
+    }
+
+    function handleUpdateUser(obj) {
+        api.updateUserProfile(obj).then((info) => {
+            setUser(info)
+        }).then(() => closeAllPopups())
     }
 
     return (
@@ -54,21 +60,22 @@ function App() {
                 <div className="page">
                     <Header/>
                     <CurrentUserContext.Provider value={user}>
-                    <Main
-                        onAddPlace={handleAddPlaceClick}
-                        onEditAvatar={handleEditAvatarClick}
-                        onEditProfile={handleEditProfileClick}
-                        onSelectedCard={handleCardClick}
-                    />
+                        <Main
+                            onAddPlace={handleAddPlaceClick}
+                            onEditAvatar={handleEditAvatarClick}
+                            onEditProfile={handleEditProfileClick}
+                            onSelectedCard={handleCardClick}
+                        />
                     </CurrentUserContext.Provider>
                     <Footer/>
                 </div>
                 <section>
                     <CurrentUserContext.Provider value={user}>
-                 <EditProfilePopup
-                     isOpen={isEditProfilePopupOpen}
-                     onClose={closeAllPopups}
-                 />
+                        <EditProfilePopup
+                            isOpen={isEditProfilePopupOpen}
+                            onClose={closeAllPopups}
+                            onUpdateUser={handleUpdateUser}
+                        />
                     </CurrentUserContext.Provider>
                     <PopupWithForm name="card" title="Новое место"
                                    isOpen={isAddPlacePopupOpen}
@@ -78,13 +85,13 @@ function App() {
                             <input name="cardTitle" id="card-title" className="popup__input" type="text"
                                    placeholder="Название"
                                    minLength="2" maxLength="30" required/>
-                                <span id="card-title-error" className="popup__message-error">  </span>
+                            <span id="card-title-error" className="popup__message-error">  </span>
                         </label>
                         <label className="popup__label">
                             <input name="link" id="link" className="popup__input" type="url"
                                    placeholder="Cсылка на картинку"
                                    required/>
-                                <span id="link-error" className="popup__message-error"> </span>
+                            <span id="link-error" className="popup__message-error"> </span>
                         </label>
                     </PopupWithForm>
                     <PopupWithForm name="avatar" title="Новый аватар"
@@ -95,7 +102,7 @@ function App() {
                             <input name="link" id="avatar-link" className="popup__input" type="url"
                                    placeholder="Cсылка на картинку"
                                    required/>
-                                <span id="avatar-link-error" className="popup__message-error"> </span>
+                            <span id="avatar-link-error" className="popup__message-error"> </span>
                         </label>
                     </PopupWithForm>
                     <ImagePopup
