@@ -3,7 +3,6 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
-import PopupWithForm from "./PopupWithForm";
 import {api} from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
@@ -75,13 +74,12 @@ function App() {
 
     function handleCardLike(card) {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
-        if(!isLiked) {
+        if (!isLiked) {
             api.updateLikes(card._id,).then((newCard) => {
                 const newCards = cards.map((c) => c._id === card._id ? newCard : c);
                 setCards(newCards);
             })
-        }
-        else {
+        } else {
             api.deleteLikes(card._id,).then((newCard) => {
                 const newCards = cards.map((c) => c._id === card._id ? newCard : c);
                 setCards(newCards);
@@ -90,15 +88,15 @@ function App() {
 
     }
 
-    function handleCardDelete(card){
-        api.deleteCard(card._id).then(()=>{
+    function handleCardDelete(card) {
+        api.deleteCard(card._id).then(() => {
             const newCards = cards.filter((item) => card._id !== item._id)
             setCards(newCards)
         })
     }
 
-    function handleAddPlaceSubmit(obj){
-        api.addCard(obj).then((newCard)=>{
+    function handleAddPlaceSubmit(obj) {
+        api.addCard(obj).then((newCard) => {
             setCards([newCard, ...cards]);
         }).then(() => closeAllPopups())
     }
@@ -127,22 +125,19 @@ function App() {
                             isOpen={isEditProfilePopupOpen}
                             onClose={closeAllPopups}
                             onUpdateUser={handleUpdateUser}
-                          //  onUpdateUse={}
 
                         />
                         <AddPlacePopup
-                                       isOpen={isAddPlacePopupOpen}
-                                       onClose={closeAllPopups}
-                                       onAddPlace={handleAddPlaceSubmit}
-                                       //onAddPlace={handleAddPlaceSubmit}
+                            isOpen={isAddPlacePopupOpen}
+                            onClose={closeAllPopups}
+                            onAddPlace={handleAddPlaceSubmit}
                         >
 
                         </AddPlacePopup>
                         <EditAvatarPopup
-                                         isOpen={isEditAvatarPopupOpen}
-                                         onClose={closeAllPopups}
-                                         onUpdateAvatar={handleUpdateAvatar}
-                                      //   onSubmit={handleAddPlaceSubmit}
+                            isOpen={isEditAvatarPopupOpen}
+                            onClose={closeAllPopups}
+                            onUpdateAvatar={handleUpdateAvatar}
                         >
                         </EditAvatarPopup>
                     </CurrentUserContext.Provider>

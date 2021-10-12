@@ -1,9 +1,8 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import {CurrentUserContext} from "../contexts/CurrentUserContext";
+
 
 function AddPlacePopup(props){
-   // const currentUser = React.useContext(CurrentUserContext);
 
     const [link, setLink] = React.useState('')
 
