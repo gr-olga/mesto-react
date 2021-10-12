@@ -8,6 +8,7 @@ import {api} from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
 
@@ -61,6 +62,47 @@ function App() {
         }).then(() => closeAllPopups())
     }
 
+
+    const currentUser = React.useContext(CurrentUserContext);
+    const [cards, setCards] = React.useState([])
+
+    React.useEffect(() => {
+        api.getInitialCards().then((card) => {
+            setCards(card)
+        }).catch((err) => console.log(err))
+    }, [])
+
+
+    function handleCardLike(card) {
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        if(!isLiked) {
+            api.updateLikes(card._id,).then((newCard) => {
+                const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+                setCards(newCards);
+            })
+        }
+        else {
+            api.deleteLikes(card._id,).then((newCard) => {
+                const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+                setCards(newCards);
+            })
+        }
+
+    }
+
+    function handleCardDelete(card){
+        api.deleteCard(card._id).then(()=>{
+            const newCards = cards.filter((item) => card._id !== item._id)
+            setCards(newCards)
+        })
+    }
+
+    function handleAddPlaceSubmit(obj){
+        api.addCard(obj).then((newCard)=>{
+            setCards([newCard, ...cards]);
+        }).then(() => closeAllPopups())
+    }
+
     return (
         <div className="App">
             <div className="body">
@@ -72,6 +114,9 @@ function App() {
                             onEditAvatar={handleEditAvatarClick}
                             onEditProfile={handleEditProfileClick}
                             onSelectedCard={handleCardClick}
+                            cards={cards}
+                            onCardLike={handleCardLike}
+                            onCardDelete={handleCardDelete}
                         />
                     </CurrentUserContext.Provider>
                     <Footer/>
@@ -82,28 +127,22 @@ function App() {
                             isOpen={isEditProfilePopupOpen}
                             onClose={closeAllPopups}
                             onUpdateUser={handleUpdateUser}
+                          //  onUpdateUse={}
+
                         />
-                        <PopupWithForm name="card" title="Новое место"
+                        <AddPlacePopup
                                        isOpen={isAddPlacePopupOpen}
                                        onClose={closeAllPopups}
+                                       onAddPlace={handleAddPlaceSubmit}
+                                       //onAddPlace={handleAddPlaceSubmit}
                         >
-                            <label className="popup__label">
-                                <input name="cardTitle" id="card-title" className="popup__input" type="text"
-                                       placeholder="Название"
-                                       minLength="2" maxLength="30" required/>
-                                <span id="card-title-error" className="popup__message-error">  </span>
-                            </label>
-                            <label className="popup__label">
-                                <input name="link" id="link" className="popup__input" type="url"
-                                       placeholder="Cсылка на картинку"
-                                       required/>
-                                <span id="link-error" className="popup__message-error"> </span>
-                            </label>
-                        </PopupWithForm>
+
+                        </AddPlacePopup>
                         <EditAvatarPopup
                                          isOpen={isEditAvatarPopupOpen}
                                          onClose={closeAllPopups}
                                          onUpdateAvatar={handleUpdateAvatar}
+                                      //   onSubmit={handleAddPlaceSubmit}
                         >
                         </EditAvatarPopup>
                     </CurrentUserContext.Provider>
