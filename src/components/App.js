@@ -7,6 +7,7 @@ import PopupWithForm from "./PopupWithForm";
 import {api} from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
 
@@ -54,6 +55,12 @@ function App() {
         }).then(() => closeAllPopups())
     }
 
+    function handleUpdateAvatar(obj) {
+        api.updateProfileAvatar(obj.avatar).then((info) => {
+            setUser(info)
+        }).then(() => closeAllPopups())
+    }
+
     return (
         <div className="App">
             <div className="body">
@@ -76,35 +83,30 @@ function App() {
                             onClose={closeAllPopups}
                             onUpdateUser={handleUpdateUser}
                         />
+                        <PopupWithForm name="card" title="Новое место"
+                                       isOpen={isAddPlacePopupOpen}
+                                       onClose={closeAllPopups}
+                        >
+                            <label className="popup__label">
+                                <input name="cardTitle" id="card-title" className="popup__input" type="text"
+                                       placeholder="Название"
+                                       minLength="2" maxLength="30" required/>
+                                <span id="card-title-error" className="popup__message-error">  </span>
+                            </label>
+                            <label className="popup__label">
+                                <input name="link" id="link" className="popup__input" type="url"
+                                       placeholder="Cсылка на картинку"
+                                       required/>
+                                <span id="link-error" className="popup__message-error"> </span>
+                            </label>
+                        </PopupWithForm>
+                        <EditAvatarPopup name="avatar" title="Новый аватар"
+                                         isOpen={isEditAvatarPopupOpen}
+                                         onClose={closeAllPopups}
+                                         onUpdateAvatar={handleUpdateAvatar}
+                        >
+                        </EditAvatarPopup>
                     </CurrentUserContext.Provider>
-                    <PopupWithForm name="card" title="Новое место"
-                                   isOpen={isAddPlacePopupOpen}
-                                   onClose={closeAllPopups}
-                    >
-                        <label className="popup__label">
-                            <input name="cardTitle" id="card-title" className="popup__input" type="text"
-                                   placeholder="Название"
-                                   minLength="2" maxLength="30" required/>
-                            <span id="card-title-error" className="popup__message-error">  </span>
-                        </label>
-                        <label className="popup__label">
-                            <input name="link" id="link" className="popup__input" type="url"
-                                   placeholder="Cсылка на картинку"
-                                   required/>
-                            <span id="link-error" className="popup__message-error"> </span>
-                        </label>
-                    </PopupWithForm>
-                    <PopupWithForm name="avatar" title="Новый аватар"
-                                   isOpen={isEditAvatarPopupOpen}
-                                   onClose={closeAllPopups}
-                    >
-                        <label className="popup__label">
-                            <input name="link" id="avatar-link" className="popup__input" type="url"
-                                   placeholder="Cсылка на картинку"
-                                   required/>
-                            <span id="avatar-link-error" className="popup__message-error"> </span>
-                        </label>
-                    </PopupWithForm>
                     <ImagePopup
                         card={selectedCard}
                         onClose={closeAllPopups}
