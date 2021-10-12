@@ -1,19 +1,16 @@
 import PopupWithForm from "./PopupWithForm";
 import React from "react";
-//import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 
-function EditAvatarPopup(props){
+function EditAvatarPopup(props) {
 
-
-  //  const currentUser = React.useContext(CurrentUserContext);
 
     const [avatar, setAvatar] = React.useState('')
+    const currentRef = React.useRef();
 
-
-  function handleChangeAvatar(e){
-    setAvatar(e.target.value)
-  }
+    function handleChangeAvatar(e) {
+        setAvatar(e.target.value)
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -23,7 +20,8 @@ function EditAvatarPopup(props){
     }
 
     return (
-        <PopupWithForm name="profile" title="Редактировать профиль"
+        <PopupWithForm name="avatar"
+                       title="Новый аватар"
                        isOpen={props.isOpen}
                        onClose={props.onClose}
                        onSubmit={handleSubmit}
@@ -34,11 +32,12 @@ function EditAvatarPopup(props){
                        required
                        value={avatar}
                        onChange={handleChangeAvatar}
-
+                       ref={currentRef}
                 />
                 <span id="avatar-link-error" className="popup__message-error"> </span>
             </label>
         </PopupWithForm>
     )
 }
+
 export default EditAvatarPopup;

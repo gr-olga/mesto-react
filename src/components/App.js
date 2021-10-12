@@ -100,7 +100,7 @@ function App() {
                                 <span id="link-error" className="popup__message-error"> </span>
                             </label>
                         </PopupWithForm>
-                        <EditAvatarPopup name="avatar" title="Новый аватар"
+                        <EditAvatarPopup
                                          isOpen={isEditAvatarPopupOpen}
                                          onClose={closeAllPopups}
                                          onUpdateAvatar={handleUpdateAvatar}
