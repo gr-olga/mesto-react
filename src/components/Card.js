@@ -32,7 +32,7 @@ function Card(props) {
             <button type="button" className={getOwnerCardClass()} onClick={handleDeleteClick}>
                 <img src={bin} alt="bin"/>
             </button>
-            <img className="card__image" alt="фото" src={link} onClick={handleClick}/>
+            <img className="card__image" alt={props.name} src={link} onClick={handleClick}/>
             <div className="card__info">
                 <h2 className="card__title">{name}</h2>
                 <div className="card__like-box">

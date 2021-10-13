@@ -58,6 +58,7 @@ function App() {
         api.updateProfileAvatar(obj.avatar).then((info) => {
             setUser(info)
         }).then(() => closeAllPopups())
+            .catch((err) => console.log(err))
     }
 
 
@@ -77,12 +78,12 @@ function App() {
             api.updateLikes(card._id,).then((newCard) => {
                 const newCards = cards.map((c) => c._id === card._id ? newCard : c);
                 setCards(newCards);
-            })
+            }).catch((err) => console.log(err))
         } else {
             api.deleteLikes(card._id,).then((newCard) => {
                 const newCards = cards.map((c) => c._id === card._id ? newCard : c);
                 setCards(newCards);
-            })
+            }).catch((err) => console.log(err))
         }
 
     }
@@ -91,13 +92,14 @@ function App() {
         api.deleteCard(card._id).then(() => {
             const newCards = cards.filter((item) => card._id !== item._id)
             setCards(newCards)
-        })
+        }).catch((err) => console.log(err))
     }
 
     function handleAddPlaceSubmit(obj) {
         api.addCard(obj).then((newCard) => {
             setCards([newCard, ...cards]);
         }).then(() => closeAllPopups())
+            .catch((err) => console.log(err))
     }
 
     return (
