@@ -8,10 +8,12 @@ function Card(props) {
     function handleClick() {
         props.onCardClick(props);
     }
-    function handleLikeClick(){
+
+    function handleLikeClick() {
         props.onCardLike(props)
     }
-    function handleDeleteClick(){
+
+    function handleDeleteClick() {
         props.onCardDelete(props)
     }
 
@@ -21,7 +23,7 @@ function Card(props) {
     }
 
     function getLikeCardClass() {
-         const isLik = props.likes.some(i => i._id === currentUser._id);
+        const isLik = props.likes.some(i => i._id === currentUser._id);
         return `card__like ${isLik ? 'card__like-active' : ''}`
     }
 

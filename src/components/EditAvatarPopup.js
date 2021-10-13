@@ -2,8 +2,7 @@ import PopupWithForm from "./PopupWithForm";
 import React from "react";
 
 function EditAvatarPopup(props) {
-    const [avatar, setAvatar] = React.useState('')
-    const currentRef = React.useRef();
+    const [avatar, setAvatar] =  React.useState('');
 
     function handleChangeAvatar(e) {
         setAvatar(e.target.value)
@@ -29,7 +28,6 @@ function EditAvatarPopup(props) {
                        required
                        value={avatar}
                        onChange={handleChangeAvatar}
-                       ref={currentRef}
                 />
                 <span id="avatar-link-error" className="popup__message-error"> </span>
             </label>
