@@ -13,22 +13,21 @@ function App() {
 
     const [user, setUser] = React.useState({})
 
+    const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
+    const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
+    const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
+
+    const [selectedCard, setSelectedCard] = React.useState(undefined)
+
     React.useEffect(() => {
         api.getInitialProfile().then((info) => {
             setUser(info);
         }).catch((err) => console.log(err))
     }, [])
 
-
-    const [selectedCard, setSelectedCard] = React.useState(undefined)
-
     function handleCardClick(card) {
         setSelectedCard(card)
     }
-
-    const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
-    const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
-    const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
 
     function handleAddPlaceClick() {
         setAddPlacePopupOpen(true)

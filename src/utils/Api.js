@@ -29,7 +29,7 @@ class Api {
     }
 
     getInitialProfile() {
-        return fetch(`https://nomoreparties.co/v1/cohort-27/users/me`, {
+        return fetch(`${this.baseUrl}/users/me`, {
             headers: this.headers
         })
             .then(handleResponse)
