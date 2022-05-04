@@ -1,3 +1,3 @@
 MESTO-REACT учебный проект для освоения React
 
-https://gr-olga.github.io/mesto-react/
+https://gr-olga.github.io/mesto-react
